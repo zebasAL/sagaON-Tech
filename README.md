@@ -1,9 +1,9 @@
 This project was bootstrapped with [Create React App]
-, and hosted by firebase, visiting:
+, and hosted by firebase.
 
+Please visit the following website:
 
-https://code-challenge-sebastian.web.app/
-
+https://code-challenge-sebastian.firebaseapp.com/
 
 ## Available Scripts
 ### `yarn start`
