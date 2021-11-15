@@ -3,6 +3,7 @@ import CSVReader from 'react-csv-reader';
 import CsvDownloader from 'react-csv-downloader';
 import './App.css';
 import {handlesMatchedValues} from './utilities';
+import InputFIeld from './components/ui/InputFIeld';
 
 const Challenge1 = () => {
 const [firstInstructionResult, setFirstInstructionResult] = useState(null);
@@ -48,10 +49,10 @@ const handleUploadedFile = (data) => {
         onFileLoaded={(data) => handleUploadedFile(data)}
       />
 
-      <input
+      <InputFIeld
         className="csv-input"
         type="text"
-        defaultValue={(document.querySelector('#react-csv-reader-input'))
+        value={(document.querySelector('#react-csv-reader-input'))
           ? document.querySelector('#react-csv-reader-input').value
           : 'Drag your CSV file with requested format'
         }
