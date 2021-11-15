@@ -19,9 +19,8 @@ export const handlesMatchedValues = (instruction, message) =>{
   const fixedMessage = handlesRepeatedValues(message);
   if (fixedMessage.includes(instruction.toLowerCase())) {
     return true
-  } else {
-    return false
   }
+    return false
 }
 
 
