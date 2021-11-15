@@ -8,6 +8,7 @@ const InputFIeld = ({
 }) => (
   <>
      <input
+        data-testId="input"
         className="csv-input"
         type={type}
         value={value}
