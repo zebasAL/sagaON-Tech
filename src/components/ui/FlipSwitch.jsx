@@ -12,7 +12,7 @@ const FlipSwitch = ({
       {isOn
         ? (
           <>
-            <button type="button" className="switch-background on" onClick={() => setisOn(!isOn)}>
+            <button type="button" data-testid="flip-switch" className="switch-background on" onClick={() => setisOn(!isOn)}>
               <div className="switch-on"><p>1</p></div>
             </button>
           </>
@@ -31,7 +31,7 @@ const FlipSwitch = ({
 FlipSwitch.propTypes = {
   label: PropTypes.string,
   isOn: PropTypes.bool,
-  setIsOff: PropTypes.func.isRequired,
+  setisOn: PropTypes.func.isRequired,
 };
 
 FlipSwitch.defaultProps = {

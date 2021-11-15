@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #b6b6b6;
+  background-color: #f2f2f2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,16 +24,16 @@
 }
 
 .csv-input {
-width: 80%;  
-height: 50px;
-border-radius: 10px;
-border: #fdfdfd dotted;
-background-color: #b6b6b6;
-color: #696969;
-font-size: 25px;
-text-align: center;
-top: 100px;
-position: absolute;
+  width: 80%;  
+  height: 50px;
+  border-radius: 10px;
+  border: #696969 dotted;
+  background-color: #f2f2f2;
+  color: #696969;
+  font-size: 25px;
+  text-align: center;
+  top: 100px;
+  position: absolute;
 }
 
 .csv-downloader {
@@ -119,7 +119,8 @@ button[disabled]{
 
 .flip-switch .label {
   position: absolute;
-  top: 0;
+  top: -16px;
   left: 100px;
-  color: #fdfdfd;
+  color: #696969;
+  font-size: 25px;
 }
