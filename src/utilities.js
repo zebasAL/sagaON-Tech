@@ -24,6 +24,20 @@ export const handlesMatchedValues = (instruction, message) =>{
   }
 }
 
+/**
+ * HandlesWinnerPoints
+ * @param {Array} roundResults 
+ * @param {number} gap 
+ * @returns {number}
+ */
+export const HandlesWinnerPoints = (roundResults, gap) => {
+  console.log(roundResults)
+  roundResults.reduce((a,b) => {
+    return gap += (a-b)
+  })
+}
+
+
 
 
 

@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #b6b6b6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,7 @@
   color: white;
 }
 
+/* homepage */
 #react-csv-reader-input {
   position: absolute;
   top: 0;
@@ -26,9 +27,9 @@
 width: 80%;  
 height: 50px;
 border-radius: 10px;
-border: aqua dotted;
-background-color: #282c34;
-color: white;
+border: #fdfdfd dotted;
+background-color: #b6b6b6;
+color: #696969;
 font-size: 25px;
 text-align: center;
 top: 100px;
@@ -58,7 +59,67 @@ button[disabled]{
   z-index: 1;
 }
 
-.sample-downloader {
-  color: aqua;
+/* Flip switch */
+.switch-background{
+  position: absolute;
+  left: 0;
+  top: 10px;
+  margin-left: 23px;
+  box-shadow: 0px 2px 3px rgb(0 0 0 / 24%);
+  width: 60px;
+  height: 30px;
+  border-radius: 30px;
+  border: none;
+  padding: 0;
 }
 
+.switch-background .switch-off {
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  margin: 0 auto 0 3px;
+  border: none;
+  transition: ease .5s;
+  background-color: #9e9e9e;
+  box-shadow: none;
+}
+
+.switch-background .switch-on {
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  margin: 0 0 0 32px;
+  border: none;
+  transition: ease .5s;
+  background-color: #9e9e9e;
+  box-shadow: none;
+}
+
+.on {
+  background-color: #fdfdfd;
+  z-index: 2;
+}
+
+.off {
+  background-color: #cccccc;
+  z-index: 2;
+}
+
+/* number of challenge */
+.switch-on, .switch-off {
+  position: relative;
+}
+
+.switch-on p, .switch-off p {
+  position: absolute;
+  top: -7.5px;
+  left: 8.5px;
+
+}
+
+.flip-switch .label {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  color: #fdfdfd;
+}
