@@ -23,7 +23,7 @@
   width: 100%;
 }
 
-.csv-input {
+.input-field {
   width: 80%;  
   height: 50px;
   border-radius: 10px;
@@ -36,7 +36,7 @@
   position: absolute;
 }
 
-.csv-downloader {
+.file-downloader {
   margin: 20px 0;
   width: 200px;
   height: 50px;
@@ -55,7 +55,7 @@ button[disabled]{
   cursor: none;
 }
 
-.csv-input, .csv-downloader, .sample-downloader {
+.input-field, .file-downloader, .sample-downloader {
   z-index: 1;
 }
 

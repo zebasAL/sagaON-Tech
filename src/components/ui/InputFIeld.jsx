@@ -8,8 +8,8 @@ const InputFIeld = ({
 }) => (
   <>
      <input
-        data-testId="input"
-        className="csv-input"
+        data-testid="input"
+        className="input-field"
         type={type}
         value={value}
         onChange={(event) => setValue(event.target.value)}
