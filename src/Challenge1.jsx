@@ -63,7 +63,7 @@ const handleUploadedFile = (fileData, fileInfo) => {
           : 'Drag your Text file with requested format'
         }
       />
-      
+      TESTING
       <CsvDownloader
         className="file-downloader"
         disabled={firstInstructionResult === null || secondInstructionResult === null}
