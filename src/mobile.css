@@ -1,0 +1,49 @@
+@media only screen and (max-width: 700px) {
+  .flip-switch {
+    margin: 20px auto;
+  }
+
+  .todo-field {
+    display: flex;
+    justify-content: center;
+  }
+
+  .todo-field input {
+    display: flex;
+    justify-content: center;
+    width: auto;
+  }
+
+  .ub-box-szg_border-box {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ub-w_400px {
+    width: 100% !important;
+  }
+
+  /* challenge-2 */
+  .challenge-2-header {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 10px;
+  }
+
+  form {
+  justify-content: center;
+  display: flex;
+  }
+
+  .table-container {
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  /* challenge 3 */
+
+  .cars-container {
+    display: block;
+  }
+
+}
