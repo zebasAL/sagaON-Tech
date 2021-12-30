@@ -1,30 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputFIeld = ({
+const InputField = ({
   value,
   setValue,
-  type
-}) => (
-  <>
-     <input
+  handleClick,
+  placeholder,
+  id,
+  type,
+  required,
+  disabled,
+}) => {
+
+  return (
+    <div className="todo-field">
+      <input
         data-testid="input"
-        className="input-field"
+        id={id}
         type={type}
+        placeholder={placeholder}
         value={value}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter' && value) {
+            handleClick();
+          }
+        }}
+        required={required}
+        disabled={disabled}
       />
-  </>
-);
+    </div>
+  );
+};
 
-InputFIeld.propTypes = {
-  value: PropTypes.string,
+InputField.propTypes = {
+  id:  PropTypes.string.isRequired,
+  value:  PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   setValue: PropTypes.func,
-  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  handleClick: PropTypes.func,
+  type: PropTypes.string,
+  required: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
-InputFIeld.defaultProps = {
+InputField.defaultProps = {
+  handleClick: () => {},
   setValue: () => {},
+  placeholder: '',
+  type: 'text',
+  required: false,
+  value: '',
+  disabled: false,
 };
 
-export default InputFIeld;
+export default InputField;

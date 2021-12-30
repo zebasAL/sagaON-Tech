@@ -13,6 +13,7 @@ describe('handles InputField', () => {
   it('renders InputField and handles on change event', () => {
     const mockEventHandler = jest.fn();
     const props = {
+      id: 'test',
       type: 'text',
       value: 'lorem',
       setValue: mockEventHandler,

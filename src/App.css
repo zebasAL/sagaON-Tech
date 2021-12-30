@@ -1,126 +1,164 @@
+html {
+  background-color: #f2f2f2;
+}
+
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: #f2f2f2;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-/* homepage */
-#react-csv-reader-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0%;
-  height: 100%;
-  width: 100%;
-}
-
-.input-field {
-  width: 80%;  
-  height: 50px;
-  border-radius: 10px;
-  border: #696969 dotted;
-  background-color: #f2f2f2;
-  color: #696969;
-  font-size: 25px;
-  text-align: center;
-  top: 100px;
-  position: absolute;
-}
-
-.file-downloader {
-  margin: 20px 0;
-  width: 200px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: dimgrey;
-  color: #fdfdfd;
-  cursor: pointer;
-  box-shadow: 0 0 0 1px #888888;
-}
-
-button:disabled,
-button[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-  cursor: none;
-}
-
-.input-field, .file-downloader, .sample-downloader {
-  z-index: 1;
+  color: black;
 }
 
 /* Flip switch */
-.switch-background{
-  position: absolute;
-  left: 0;
-  top: 10px;
-  margin-left: 23px;
-  box-shadow: 0px 2px 3px rgb(0 0 0 / 24%);
-  width: 60px;
-  height: 30px;
-  border-radius: 30px;
+.flip-switch {
+  cursor: pointer;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  background: none;
+  color: inherit;
   border: none;
   padding: 0;
+  font: inherit;
+  outline: inherit;
 }
 
-.switch-background .switch-off {
-  border-radius: 100%;
-  width: 25px;
-  height: 25px;
-  margin: 0 auto 0 3px;
-  border: none;
-  transition: ease .5s;
-  background-color: #9e9e9e;
-  box-shadow: none;
+.label {
+  margin-left: 20px;
 }
 
-.switch-background .switch-on {
-  border-radius: 100%;
-  width: 25px;
-  height: 25px;
-  margin: 0 0 0 32px;
-  border: none;
-  transition: ease .5s;
-  background-color: #9e9e9e;
-  box-shadow: none;
-}
-
-.on {
+.flip-switch-container {
   background-color: #fdfdfd;
-  z-index: 2;
+  height: 8px;
+  width: 150px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 2px 3px rgb(0 0 0 / 10%);
 }
 
-.off {
-  background-color: #cccccc;
-  z-index: 2;
+.flip-switch-progress {
+  height: 8px;
+  width: 50px;
+  background-color: rgb(125 190 241);
+  transition: all 1s ease 0s;
+  border-radius: 10px 0 0 10px;
 }
 
-/* number of challenge */
-.switch-on, .switch-off {
-  position: relative;
-}
-
-.switch-on p, .switch-off p {
+.flip-button {
+  margin: 0;
   position: absolute;
-  top: -7.5px;
-  left: 8.5px;
-
+  transition: all 1s ease 0s;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: none;
+  box-shadow: 0px 0px 3px 1px rgb(0 0 0 / 24%);
+  background-color: #e1e2e3;
 }
 
-.flip-switch .label {
-  position: absolute;
-  top: -16px;
-  left: 100px;
-  color: #696969;
-  font-size: 25px;
+.button-label {
+  margin-top: 2.5px;
+}
+
+/* input */
+.label-text {
+  margin-top: 0;
+}
+
+.todo-field input {
+  z-index: 1;
+  width: calc(100% - 70px);
+  max-width: 400px;
+  height: 40px;
+  border-radius: 17px;
+  border: none;
+  box-shadow: 0px 0px 4px rgb(145 145 145 / 47%);
+  padding: 0 35px;
+  margin-top: 20px;
+}
+
+.todo-field input:focus-visible {
+  box-shadow: 0px 0px 10px rgb(145 145 145 / 100%);
+  outline: none;
+}
+
+/* challenge 2 */
+.input-container p.label-text {
+  margin: 0;
+  font-size: 15px;
+  text-align: center;
+}
+
+.input-container label .todo-field input {
+  margin: 5px 0 20px 0;
+}
+
+.challenge-2-header {
+  flex-direction: row;
+  margin: 20px 50px;
+}
+
+form {
+  margin-right: 10px;
+  width: 50%;
+}
+
+.table-container {
+  width: 50%;
+}
+
+input#submit {
+  width: 150px;
+  cursor: pointer;
+}
+
+/* challenge 3 */
+
+.cars-container {
+  display: flex;
+}
+
+.cars-container input {
+  border-radius: 0;
+}
+
+.cars-container input:focus-visible {
+  z-index: 10;
+}
+
+.add-car-button {
+  width: 150px;
+  cursor: pointer;
+  max-width: 400px;
+  height: 40px;
+  border: none;
+  box-shadow: 0px 0px 4px rgb(145 145 145 / 47%);
+  padding: 0 35px;
+  margin-top: 20px;
+  background-color: #fdfdfd;
+}
+
+.add-car-button:hover {
+background-color: #f3f3f3;
+}
+
+.options-container {
+  margin-top: 50px;
+}
+
+.options-container label {
+  font-size: 20px;
+}
+
+.options-container select {
+  margin: 0 20px;
+  height: 40px;
+  text-align: center;
 }

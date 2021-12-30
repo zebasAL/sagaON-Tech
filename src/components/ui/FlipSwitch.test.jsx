@@ -14,13 +14,14 @@ describe('handles switch', () => {
   it('renders switchflip', () => {
     const mockEventHandler = jest.fn();
     const props = {
-      isOn: true,
-      setisOn: mockEventHandler,
+      challenge: { marginLeft: '0px', number: 1 },
+      label: 'lorem',
+      setChallenge: mockEventHandler,
     }
   
     render(  <FlipSwitch {...props} />);
-    const button = screen.getByTestId('flip-switch');
+    const button = screen.getByTestId('switch');
     fireEvent.click(button);
-    expect(button.classList.contains('off')).toBe(false);
+    expect(getComputedStyle(button).marginLeft).not.toBe(props.challenge.marginLeft);
   });
 });

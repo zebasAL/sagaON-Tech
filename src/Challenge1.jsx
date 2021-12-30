@@ -1,86 +1,49 @@
-import React, {useState} from 'react';
-import CSVReader from 'react-csv-reader';
-import CsvDownloader from 'react-csv-downloader';
+import React, { useState } from 'react';
+import { Table } from 'evergreen-ui/';
+import InputField from './components/ui/InputField';
 import './App.css';
-import {handlesMatchedValues, rulesChallenge1} from './utilities';
-import InputFIeld from './components/ui/InputFIeld';
 
 const Challenge1 = () => {
-const [firstInstructionResult, setFirstInstructionResult] = useState(null);
-const [secondInstructionResult, setSecondInstructionResult] = useState(null);
+const [value, setValue] = useState('')
+const [items, setItems] = useState([])
 
-const dataResults = [
-  [`first instruction: ${firstInstructionResult}`],
-  [`second instruction: ${secondInstructionResult}`]
-];
-
-/**
- * Handle uploadedFile data
- * @param {Array} data 
- * @returns {void} 
- */
-const handleUploadedFile = (fileData, fileInfo) => {
-  //Get Entry values from text file
-  const data = []
-  fileData.map((value) => data.push(value[0]));
-
-  //Set every row value
-  const [charactersLength, firstInstruction, secondInstruction, message] = [...data];
-
-  //Gets the separated values ​​by whitespace
-  const [firstInstructionLength, secondInstructionLength, messageLength] = charactersLength.toString().split(/\s+/);
-
-  //Sets validation requirements
-   if (fileInfo.type !== 'text/plain') {
-    alert('Uploaded file is not a text file');
-   } else if (data.length === 4
-    && (messageLength >= 3 && messageLength <= 5000 && parseInt(messageLength) === message.length)
-    && (firstInstructionLength >= 2 && firstInstructionLength <= 50 && parseInt(firstInstructionLength) === firstInstruction.length)
-    && (secondInstructionLength >= 2 && secondInstructionLength <= 50 && parseInt(secondInstructionLength) === secondInstruction.length)) {
-      setFirstInstructionResult(handlesMatchedValues(firstInstruction.toString(), message.toString()));
-      setSecondInstructionResult(handlesMatchedValues(secondInstruction.toString(), message.toString()));
-  } else {
-    alert(`Unvalid data, please follow the next steps: ${rulesChallenge1()}`);
-  }
-  // reset input field when file doesn't match requeriments
-  document.querySelector('#react-csv-reader-input').value = '';
-}
+const handleItems = () => {
+  const newItems = [...items];
+  const newValue = value.replace(/[^.0-9 ]/g, '').split(/\s+/);
+  newValue.forEach((item) => newItems.push({ numero: item ? item : 0, resultado: parseInt(item ? item : 0) * 2 }));
+  console.log(newItems);
+  setValue('');
+  setItems(newItems);
+};
 
   return (
     <div className="App-header">
+    <label htmlFor="challenge-1">
+      <p className="label-text">Escribe los numeros que desea multiplicar</p>
+      <InputField
+          id="challenge-1"
+          placeholder="Ejemplo: 1, 3, 4, 5 o 15 22 10"
+          value={value}
+          setValue={setValue}
+          handleClick={handleItems}
+          />
+      </label>
 
-      <CSVReader  
-        id="file-reader"
-        onError={() => alert('Oops, something went wrong, try again')}
-        accept="text/plain"
-        onFileLoaded={(fileData, fileInfo) => handleUploadedFile(fileData, fileInfo)}
-      />
-
-      <InputFIeld
-        type="text"
-        value={(document.querySelector('#react-csv-reader-input'))
-          ? document.querySelector('#react-csv-reader-input').value
-          : 'Drag your Text file with requested format'
-        }
-      />
-      TESTING
-      <CsvDownloader
-        className="file-downloader"
-        disabled={firstInstructionResult === null || secondInstructionResult === null}
-        filename="results"
-        extension=".txt"
-        datas={dataResults}
-        text="Download results"
-      />
-
-      <a
-        className="sample-downloader"
-        download
-        href="/test-challenge1.txt"
-      >
-        Download sample Text file
-      </a>
-
+        <Table marginTop={50}>
+        <Table.Head>
+          <Table.TextHeaderCell>numero</Table.TextHeaderCell>
+          <Table.TextHeaderCell>resultado</Table.TextHeaderCell>
+        </Table.Head>
+        <Table.Body height={380} width={400}>
+        {items.length > 0 && items.map((item) => (
+            <Table.Row key={item}>
+              <Table.TextCell>{item.numero}</Table.TextCell>
+              <Table.TextCell>{item.resultado}</Table.TextCell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+      
     </div>
   );
 }

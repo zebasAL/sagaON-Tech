@@ -1,106 +1,124 @@
-import React, {useState} from 'react';
-import CSVReader from 'react-csv-reader';
-import CsvDownloader from 'react-csv-downloader';
+import React, { useState } from 'react';
 import './App.css';
-import { rulesChallenge2 } from './utilities';
-import InputFIeld from './components/ui/InputFIeld';
+import { Table } from 'evergreen-ui/';
+import InputFIeld from './components/ui/InputField';
 
 const Challenge2 = () => {
-const [gameResults, setGameResults] = useState([]);
-const [roundResults, setRoundResults] = useState([]);
+  const [value, setValue] = useState({name: '', lastName: '', age: undefined, weight: undefined, height: undefined });
+  const [items, setItems] = useState([]);
 
-const results = [];
-results.push(gameResults);
-roundResults.map((value) => results.push(value));
-
-const dataResults = results;
-
-/**
- * Handle uploadedFile data
- * @param {Array} data 
- * @returns {void} 
- */
-const handleUploadedFile = (fileData, fileInfo) => {
-   //Get Entry values from text file
-   const data = []
-   fileData.map((value) => data.push(value[0]));
-
-  //Set how many rounds were played and each result
-  const rounds = data[0];
-  const resultsPerRound = data.slice(1, rounds + 1)
-
-  //Set validation requirement
-  if (fileInfo.type !== 'text/plain') {
-    alert('Uploaded file is not a text file');
-  } else if (rounds <= 10000 && (parseInt(rounds) === resultsPerRound.length) && (resultsPerRound.map((value) => value.split(' ').length === 2).every((item) => (item === true)))) {
-    
-    let victoryPoints = [];
-    const winner = [];
-    let gap = 0;
-
-    //Set 2 arrays, one with the winners and a second one with victory points
-    resultsPerRound.forEach((result, index) => 
-      victoryPoints.push(result.toString().split(' ').reduce((a,b) => {
-        return gap += (a-b)
-      }))
-      && winner.push((gap < 0) ? 2 : 1)
-    )
-
-    //Change the difference of players points to absolute value
-    victoryPoints = victoryPoints.map(Math.abs);
-
-    //Set the winner and acomulated points
-    setGameResults([`winning player ${winner[rounds - 1]}`, `winning points ${victoryPoints[rounds - 1]}`])
-
-    //Gets results of all acomulated rounds
-    const roundResults = (winner.map((win, index) => [win, victoryPoints[index]]))
-    roundResults.unshift(['Rounds Results:'])
-    setRoundResults(roundResults)
-
-  } else {
-    alert(` Unvalid data, please follow the next steps: ${rulesChallenge2()}`);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newItems = [...items];
+    newItems.push(value);
+    setItems(newItems);
+    setValue({name: '', lastName: '', age: undefined, weight: undefined, height: undefined });
   }
-  // reset input field when file doesn't match requeriments
-  document.querySelector('#react-csv-reader-input').value = '';
-}
 
-  return (
-    <div className="App-header">
+  return (  
+    <div className="App-header challenge-2-header">
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div className="input-container">
+          <label htmlFor="name">
+            <p className="label-text">Nombre</p>
+            <InputFIeld
+              id="name"
+              placeholder="Escribe tu nombre"
+              type="text"
+              value={value.name}
+              setValue={(value) => setValue((prevState) => ({
+                ...prevState, name: value,
+              }))}
+              required
+            />
+          </label>
+          <label htmlFor="lastName">
+            <p className="label-text">Apellido</p>
+            <InputFIeld
+              id="lastName"
+              placeholder="Escribe tu apellido"
+              type="text"
+              value={value.lastName}
+              setValue={(value) => setValue((prevState) => ({
+                ...prevState, lastName: value,
+              }))}
+              required
+            />
+          </label>
+          <label htmlFor="age">
+            <p className="label-text">Edad</p>
+            <InputFIeld
+              id="age"
+              placeholder="Escribe tu edad"
+              type="number"
+              value={value.age}
+              setValue={(value) => setValue((prevState) => ({
+                ...prevState, age: value,
+              }))}
+              required
+          />
+          </label>
+          <label htmlFor="weight">
+            <p className="label-text">Peso</p>
+            <InputFIeld
+              id="weight"
+              placeholder="Escribe tu peso"
+              type="number"
+              value={value.weight}
+              setValue={(value) => setValue((prevState) => ({
+                ...prevState, weight: value,
+              }))}
+              required
+            />
+          </label>
+          <label htmlFor="height">
+            <p className="label-text">Altura</p>
+            <InputFIeld
+              id="height"
+              placeholder="Escribe tu altura"
+              type="number"
+              value={value.height}
+              setValue={(value) => setValue((prevState) => ({
+                ...prevState, height: value,
+              }))}
+              required
+            />
+          </label>
+          <InputFIeld
+            className="submit-button"
+            id="submit"
+            disabled={!value.name || !value.age || !value.age || !value.weight || !value.height}
+            type="submit"
+            value="Enviar"
+            setValue={() => {}}
+          />
+        </div>
+      </form>
+      <div className="table-container">
+        <Table marginTop={0} maxWidth={800}>
+          <Table.Head>
+            <Table.TextHeaderCell>NOMBRE</Table.TextHeaderCell>
+            <Table.TextHeaderCell>APELLIDO</Table.TextHeaderCell>
+            <Table.TextHeaderCell>EDAD</Table.TextHeaderCell>
+            <Table.TextHeaderCell>PESO (KG)</Table.TextHeaderCell>
+            <Table.TextHeaderCell>ALTURA (M)</Table.TextHeaderCell>
 
-      <CSVReader 
-        id="file-reader"
-        onError={() => alert('Ops, something went wrong, try again')}
-        accept="text/plain"
-        onFileLoaded={(fileData, fileInfo) => handleUploadedFile(fileData, fileInfo)}
-      />
-
-      <InputFIeld
-        type="text"
-        value={(document.querySelector('#react-csv-reader-input'))
-          ? document.querySelector('#react-csv-reader-input').value
-          : 'Drag your Text file with requested format'
-        }
-      />
-  
-      <CsvDownloader
-        className="file-downloader"
-        disabled={gameResults.length === 0}
-        filename="results"
-        extension=".txt"
-        text="Download results"
-        datas={dataResults}
-      />
-
-      <a
-        className="sample-downloader"
-        download
-        href="/test-challenge2.txt"
-      >
-        Download sample Text file
-      </a>
-
+          </Table.Head>
+          <Table.Body height={380} maxWidth={800} width="100%">
+          {items.length > 0 && items.map((item) => (
+              <Table.Row key={item.name + item.lastName + item.age}>
+                <Table.TextCell>{item.name}</Table.TextCell>
+                <Table.TextCell>{item.lastName}</Table.TextCell>
+                <Table.TextCell>{item.age}</Table.TextCell>
+                <Table.TextCell>{item.weight} kg</Table.TextCell>
+                <Table.TextCell>{item.height} m</Table.TextCell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </div>
     </div>
   );
-}
+};
 
 export default Challenge2;
